@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Movie Search System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link rel="stylesheet" href="site.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="data/movies.js"></script>
+        <script type="text/javascript">
+            var filmNames = [];
+            window.onload = function() {
+                var films = movies["movies"];
+                for (var i = 0; i < films.length; i++) {
+                    filmNames.push(films[i]["title"]);
+                    $("#searchDatalist").append("<option value=\"" + films[i]["title"] + "\">" + films[i]["title"] + "</option>")
+                }
+            }
+            
+            function searchForMovies(searchText) {
+                searchText = searchText.toString().toLowerCase();
+                console.log($.inArray(searchText, filmNames, 0));
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-header">
+                <span>
+                    <img src="images/movie.png"/>
+                </span>
+                <span>&emsp;</span>
+                <span>
+                    <b>RENT A MOVIE</b>
+                </span>
+                <span>
+                    <label for="searchBar">Search:</label> 
+                    <input list="searchDatalist" id="searchBar" type="text"/>
+                    <datalist id="searchDatalist"></datalist>
+                    <button onclick="searchForMovies($('#searchBar').val());">Search</button>
+                </span>
+            </div>
+            <div class="navbar-body">
+                <span>
+                    <label for="sortDropdown">Sort By: </label>
+                    <select id="sortDropdown">
+                        <option value="year">year</option>
+                        <option value="book">book </option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </body>
+</html>
